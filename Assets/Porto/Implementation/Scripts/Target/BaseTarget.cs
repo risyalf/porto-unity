@@ -18,18 +18,14 @@ namespace Porto.Implementation.Scripts.Target
         private string id = string.Empty;
 
         #endregion
+
         #region ITarget<Transform>
 
         public string ID => id;
 
-        public T CurrentTarget { get; private set; }
+        public T CurrentTarget { get; protected set; }
 
-        public void ChangeTarget(T newTarget)
-        {
-            CurrentTarget = newTarget;
-            
-            OnChangeTarget?.Invoke(ID);
-        }
+        public abstract void ChangeTarget(T newTarget);
 
         public Action<string> OnChangeTarget { get; set; } = null;
 

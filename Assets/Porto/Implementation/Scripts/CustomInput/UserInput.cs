@@ -6,20 +6,22 @@ namespace Porto.Implementation.Scripts.CustomInput
     /// <summary>
     /// Implementasi IInput dengan value Vector3.
     /// </summary>
-    public class UserInput : MonoBehaviour, IInput<Vector3>
+    public class UserInput<T> : MonoBehaviour, IInput<T>
     {
         #region Variables
 
         /// <summary>
         /// Trigger disable atau bukan.
         /// </summary>
-        protected bool Disable = false; 
-    
+        protected bool Disable = false;
+
         #endregion
-        
+
         #region IInput<Vector3>
 
-        public Vector3 Value { get; protected set; } = Vector3.zero;
+        public virtual string ID { get; protected set; } = string.Empty;
+
+        public T Value { get; protected set; }
 
         public void SetDisable(bool disable)
         {

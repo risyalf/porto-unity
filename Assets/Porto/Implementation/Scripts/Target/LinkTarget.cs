@@ -9,6 +9,15 @@ namespace Porto.Implementation.Scripts.Target
     /// </summary>
     public class LinkTarget : BaseTarget<string>
     {
-        
+        #region BaseTarget<string>
+
+        public override void ChangeTarget(string newTarget)
+        {
+            CurrentTarget = newTarget;
+
+            OnChangeTarget?.Invoke(newTarget);
+        }
+
+        #endregion
     }
 }

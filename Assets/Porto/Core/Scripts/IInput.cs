@@ -3,14 +3,14 @@ using UnityEngine;
 namespace Porto.Core.Scripts
 {
     /// <summary>
-    /// Menangani input yang dilakukan oleh user.
+    /// Menangani input yang diberikan oleh user.
     /// </summary>
-    public interface IInput<T>
+    public interface IInput
     {
         /// <summary>
-        /// Nilai dari input.
+        /// Id dari input.
         /// </summary>
-        T Value { get; }
+        string ID { get; }
 
         /// <summary>
         /// Method untuk disable input.
@@ -19,5 +19,15 @@ namespace Porto.Core.Scripts
         /// Apakah input disable atau tidak.
         /// </param>
         void SetDisable(bool disable);
+    }
+    /// <summary>
+    /// Menangani input yang dilakukan oleh user.
+    /// </summary>
+    public interface IInput<T> : IInput
+    {
+        /// <summary>
+        /// Nilai dari input.
+        /// </summary>
+        T Value { get; }
     }
 }

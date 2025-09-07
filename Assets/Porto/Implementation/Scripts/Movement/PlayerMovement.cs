@@ -16,7 +16,12 @@ namespace Porto.Implementation.Scripts.Movement
         /// Input yang diberikan oleh user.
         /// </summary>
         private IInput<Vector3> _input = null;
-        
+
+        /// <summary>
+        /// Input yang diberikan oleh user.
+        /// </summary>
+        private IInput<bool> _inputSpecial = null;
+
         /// <summary>
         /// Kecepatan yang dimiliki oleh object.
         /// </summary>
@@ -28,7 +33,8 @@ namespace Porto.Implementation.Scripts.Movement
 
         public void DoMove()
         {
-            transform.Translate(_input.Value * _speed.Value * Time.deltaTime, Space.World);
+            var speed = _inputSpecial.Value ? _speed.ValueBoost : _speed.Value;
+            transform.Translate(speed * Time.deltaTime * _input.Value, Space.World);
         }
 
         #endregion
@@ -39,7 +45,10 @@ namespace Porto.Implementation.Scripts.Movement
         {
             _input = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IInput<Vector3>>()
                 .FirstOrDefault();
-            
+
+            _inputSpecial = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IInput<bool>>()
+                .FirstOrDefault();
+
             _speed = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ISpeed>()
                 .FirstOrDefault();
         }
